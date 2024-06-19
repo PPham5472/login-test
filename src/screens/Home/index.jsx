@@ -20,6 +20,9 @@ const Home = () => {
                     <input className="input" placeholder="jordan@gmail.com" />
                     <label className="input-label">Password</label>
                     <input className="input" placeholder="Applause123$" />
+                    <button className="button" disabled={true}>
+                        Login
+                    </button>
                 </section>
             </main>
         </div>

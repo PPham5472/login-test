@@ -29,6 +29,7 @@
         "#app": "./src/App/index.jsx",
         "#library/*": "./src/library/*",
         "#router": "./src/router/index.jsx",
+        "#modules/*": "./src/modules/*",
         "#screens": "./src/screens/index.js",
         "#src/*": "./src/*"
     }
