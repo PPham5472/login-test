@@ -20,7 +20,10 @@ export default ({ form }) => {
             },
             body: JSON.stringify(formValues),
         })
-            .then((apiRes) => ({ statusCode: apiRes?.status, res: apiRes?.json() }))
+            .then(async (apiRes) => {
+                const res = await apiRes.json();
+                return { statusCode: apiRes?.status, res };
+            })
             .then(({ statusCode, res }) => {
                 setIsLoading(false);
 
