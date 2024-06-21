@@ -75,6 +75,11 @@ body {
     position: absolute;
     top: 31px;
 }
+.padlock {
+    left: 8px;
+    position: absolute;
+    top: 28px;
+}
 .button {
     background-color: rgb(0, 113, 217);
     border: 1px solid transparent;
