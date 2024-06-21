@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "#library/components";
-import { useForm } from "#modules/hooks";
 import { mergeStyles } from "#modules/utils";
-import IlluImg from "./assets/Illu.png";
-import LockImg from "./assets/Lock.png";
+import Context from "#store";
 import LogoImg from "./assets/Logo.png";
-import MailImg from "./assets/Mail.png";
-import { EmailInput, PasswordInput } from "./components";
-import { useController } from "./hooks";
 import stylesheet from "./styles.module.css";
 
 const Home = () => {
     const { cx } = mergeStyles(stylesheet);
-    const formStore = useForm({ email: "test@applausehq.com", password: "test1234!" });
-    const {
-        handlers: { onSubmit },
-    } = useController({ form: formStore });
+    const { currentUser, setCurrentUser } = useContext(Context);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!currentUser) navigate("/login");
+    }, []);
+
+    const clickHander = () => {
+        setCurrentUser(null);
+        navigate("/");
+    };
 
     return (
         <div className={cx("App")}>
@@ -23,23 +26,8 @@ const Home = () => {
                 <img src={LogoImg} />
             </header>
             <main className={cx("main")}>
-                <img className={cx("illustration")} src={IlluImg} />
-                <section className={cx("section-login")}>
-                    <EmailInput
-                        form={formStore.email}
-                        icon={MailImg}
-                        label={"Email address"}
-                        placeholder={"jordan@gmail.com"}
-                    />
-                    <PasswordInput
-                        form={formStore.password}
-                        icon={LockImg}
-                        label={"Password"}
-                        placeholder={"Applause123$"}
-                        type="password"
-                    />
-                    <Button ctr={{ onSubmit }}>Login</Button>
-                </section>
+                <h3>{`Welcome, ${currentUser?.name}!`}</h3>
+                <Button ctr={{ onSubmit: clickHander }}>Go Back</Button>
             </main>
         </div>
     );

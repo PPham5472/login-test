@@ -32,8 +32,8 @@
         "#library/*": "./src/library/*",
         "#router": "./src/router/index.jsx",
         "#modules/*": "./src/modules/*",
-        "#netlify-api": "./netlify/functions/api/index.js",
         "#screens": "./src/screens/index.js",
-        "#src/*": "./src/*"
+        "#src/*": "./src/*",
+        "#store": "./src/store/index.jsx"
     }
 }
