@@ -16,7 +16,13 @@ const EmailInput = ({ form, icon, label, placeholder }) => {
                 {icon && <img className={cx("mail")} src={icon} />}
                 {label}
             </label>
-            <input className={cx("input")} onChange={inputHandler} placeholder={placeholder} value={value} />
+            <input
+                className={cx("input")}
+                maxLength={255}
+                onChange={inputHandler}
+                placeholder={placeholder}
+                value={value}
+            />
         </>
     );
 };

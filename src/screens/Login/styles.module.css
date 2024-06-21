@@ -27,6 +27,7 @@ body {
     justify-content: center;
 
     background-color: rgb(39, 189, 33);
+    caret-color: transparent;
     height: 120px;
     margin-bottom: 96px;
     width: 100%;
@@ -41,6 +42,7 @@ body {
     width: 100%;
 }
 .illustration {
+    caret-color: transparent;
     margin-bottom: 22px;
 }
 .section-login {

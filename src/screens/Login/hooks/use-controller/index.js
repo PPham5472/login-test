@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import context from "#store";
+import { validateForm } from "./helpers";
 import mockData from "./mock-data";
 
 const { fakeFetch } = mockData();
@@ -35,6 +36,7 @@ export default ({ formStore }) => {
                 setIsLoading(false);
 
                 console.log(statusCode, res);
+                validateForm(formStore._getForm());
 
                 if (statusCode !== 200) {
                     console.log("Error", res);
