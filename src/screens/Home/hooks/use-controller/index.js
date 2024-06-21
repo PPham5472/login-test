@@ -2,7 +2,7 @@ import { useState } from "react";
 import mockData from "./mock-data";
 
 const { fakeFetch } = mockData();
-window.fetch = fakeFetch;
+// window.fetch = fakeFetch;
 
 export default ({ form }) => {
     const [isLoading, setIsLoading] = useState();
@@ -11,8 +11,8 @@ export default ({ form }) => {
         setIsLoading(true);
 
         const formValues = form._getForm();
-        fetch("", {
-            method: "POST",
+        fetch("/api/hello", {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
