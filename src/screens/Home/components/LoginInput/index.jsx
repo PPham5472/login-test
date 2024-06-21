@@ -1,18 +1,24 @@
 import React from "react";
+import { useController } from "./hooks";
 
-const TextInput = ({ form, icon, iconClassName, label, placeholder, type }) => {
+const LoginInput = ({ form, icon, iconClassName, label, placeholder, type }) => {
+    const {
+        handlers: { inputHandler },
+        state: { value },
+    } = useController();
+
     return (
         <>
             <label className="input-label">
                 {icon && <img className={iconClassName} src={icon} />}
                 {label}
             </label>
-            <input className="input" placeholder={placeholder} type={type} />
+            <input className="input" onChange={inputHandler} placeholder={placeholder} type={type} value={value} />
         </>
     );
 };
 
-TextInput.defaultProps = {
+LoginInput.defaultProps = {
     form: { value: "", setValue: () => {} },
     icon: null,
     iconClassName: "",
@@ -21,4 +27,4 @@ TextInput.defaultProps = {
     type: "",
 };
 
-export default TextInput;
+export default LoginInput;
