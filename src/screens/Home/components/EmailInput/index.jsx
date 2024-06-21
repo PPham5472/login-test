@@ -1,7 +1,10 @@
 import React from "react";
+import { mergeStyles } from "#modules/utils";
 import { useController } from "./hooks";
+import stylesheet from "./styles.module.css";
 
-const EmailInput = ({ form, icon, iconClassName, label, placeholder }) => {
+const EmailInput = ({ form, icon, label, placeholder }) => {
+    const { cx } = mergeStyles(stylesheet);
     const {
         handlers: { inputHandler },
         state: { value },
@@ -9,11 +12,11 @@ const EmailInput = ({ form, icon, iconClassName, label, placeholder }) => {
 
     return (
         <>
-            <label className="input-label">
-                {icon && <img className={iconClassName} src={icon} />}
+            <label className={cx("input-label")}>
+                {icon && <img className={cx("mail")} src={icon} />}
                 {label}
             </label>
-            <input className="input" onChange={inputHandler} placeholder={placeholder} value={value} />
+            <input className={cx("input")} onChange={inputHandler} placeholder={placeholder} value={value} />
         </>
     );
 };
@@ -21,7 +24,6 @@ const EmailInput = ({ form, icon, iconClassName, label, placeholder }) => {
 EmailInput.defaultProps = {
     form: { value: "", setValue: () => {} },
     icon: null,
-    iconClassName: "",
     label: "",
     placeholder: "",
 };

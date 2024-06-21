@@ -3,7 +3,7 @@ import { mergeStyles } from "#modules/utils";
 import { useController, useInput } from "./hooks";
 import stylesheet from "./styles.module.css";
 
-const PasswordInput = ({ form, icon, iconClassName, label, placeholder }) => {
+const PasswordInput = ({ form, icon, label, placeholder }) => {
     const { cx } = mergeStyles(stylesheet);
     const {
         handlers: { inputHandler },
@@ -15,8 +15,8 @@ const PasswordInput = ({ form, icon, iconClassName, label, placeholder }) => {
 
     return (
         <>
-            <label className="input-label">
-                {icon && <img className={iconClassName} src={icon} />}
+            <label className={cx("input-label")}>
+                {icon && <img className={cx("padlock")} src={icon} />}
                 {label}
             </label>
             <div className={cx(["input-container", isFocused && "input-container--focused"])}>
@@ -40,7 +40,6 @@ const PasswordInput = ({ form, icon, iconClassName, label, placeholder }) => {
 PasswordInput.defaultProps = {
     form: { value: "", setValue: () => {} },
     icon: null,
-    iconClassName: "",
     label: "",
     placeholder: "",
 };
