@@ -27,7 +27,7 @@ const Home = () => {
             </header>
             <main className={cx("main")}>
                 <h3>{`Welcome, ${currentUser?.name}!`}</h3>
-                <Button ctr={{ onSubmit: clickHander }}>Go Back</Button>
+                <Button ctr={{ onSubmit: clickHander }}>Log out</Button>
             </main>
         </div>
     );

@@ -1,18 +1,25 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import context from "#store";
 import mockData from "./mock-data";
 
 const { fakeFetch } = mockData();
-// window.fetch = fakeFetch;
+window.fetch = fakeFetch;
 
-export default ({ form }) => {
+export default ({ formStore }) => {
     const { setCurrentUser } = useContext(context);
-    const [isLoading, setIsLoading] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+    useEffect(() => {
+        const isFormComplete = formStore._values.every((item) => (item.length > 0 ? true : false));
+        if (isFormComplete) setIsButtonDisabled(false);
+        else setIsButtonDisabled(true);
+    }, [...formStore._values]);
 
     const onSubmit = () => {
         setIsLoading(true);
 
-        const formValues = form._getForm();
+        const formValues = formStore._getForm();
         fetch("/api/login", {
             method: "POST",
             headers: {
@@ -20,10 +27,10 @@ export default ({ form }) => {
             },
             body: JSON.stringify(formValues),
         })
-            .then(async (apiRes) => {
-                const res = await apiRes.json();
-                return { statusCode: apiRes?.status, res };
-            })
+            // .then(async (apiRes) => {
+            //     const res = await apiRes.json();
+            //     return { statusCode: apiRes?.status, res };
+            // })
             .then(({ statusCode, res }) => {
                 setIsLoading(false);
 
@@ -41,6 +48,12 @@ export default ({ form }) => {
     return {
         handlers: {
             onSubmit,
+        },
+        state: {
+            isLoading,
+            setIsLoading,
+            isButtonDisabled,
+            setIsButtonDisabled,
         },
     };
 };

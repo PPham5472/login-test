@@ -15,7 +15,8 @@ const Login = () => {
     const formStore = useForm({ email: "test@applausehq.com", password: "test1234!" });
     const {
         handlers: { onSubmit },
-    } = useController({ form: formStore });
+        state: { isLoading, setIsLoading, isButtonDisabled, setIsButtonDisabled },
+    } = useController({ formStore });
 
     return (
         <div className={cx("App")}>
@@ -38,7 +39,12 @@ const Login = () => {
                         placeholder={"Applause123$"}
                         type="password"
                     />
-                    <Button ctr={{ onSubmit }}>Login</Button>
+                    <Button
+                        className={cx(isButtonDisabled ? "button-disabled" : "")}
+                        ctr={{ onSubmit }}
+                        disabled={isButtonDisabled}>
+                        Login
+                    </Button>
                 </section>
             </main>
         </div>
