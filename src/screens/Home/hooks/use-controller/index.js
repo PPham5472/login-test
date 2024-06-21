@@ -11,8 +11,8 @@ export default ({ form }) => {
         setIsLoading(true);
 
         const formValues = form._getForm();
-        fetch("/api/hello", {
-            method: "GET",
+        fetch("/api/login", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
