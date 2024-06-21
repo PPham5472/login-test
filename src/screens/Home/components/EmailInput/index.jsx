@@ -1,11 +1,11 @@
 import React from "react";
 import { useController } from "./hooks";
 
-const LoginInput = ({ form, icon, iconClassName, label, placeholder, type }) => {
+const EmailInput = ({ form, icon, iconClassName, label, placeholder }) => {
     const {
         handlers: { inputHandler },
         state: { value },
-    } = useController();
+    } = useController({ form });
 
     return (
         <>
@@ -13,18 +13,17 @@ const LoginInput = ({ form, icon, iconClassName, label, placeholder, type }) => 
                 {icon && <img className={iconClassName} src={icon} />}
                 {label}
             </label>
-            <input className="input" onChange={inputHandler} placeholder={placeholder} type={type} value={value} />
+            <input className="input" onChange={inputHandler} placeholder={placeholder} value={value} />
         </>
     );
 };
 
-LoginInput.defaultProps = {
+EmailInput.defaultProps = {
     form: { value: "", setValue: () => {} },
     icon: null,
     iconClassName: "",
     label: "",
     placeholder: "",
-    type: "",
 };
 
-export default LoginInput;
+export default EmailInput;

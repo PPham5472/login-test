@@ -5,15 +5,15 @@ import LockImg from "./assets/Lock.png";
 import LogoImg from "./assets/Logo.png";
 import MailImg from "./assets/Mail.png";
 import { Button } from "#library/components";
-import { LoginInput } from "./components";
+import { EmailInput, PasswordInput } from "./components";
 import { useController } from "./hooks";
 import "./styles.css";
 
 const Home = () => {
-    const form = useForm({ email: "test@applausehq.com", password: "test1234!" });
+    const formStore = useForm({ email: "test@applausehq.com", password: "test1234!" });
     const {
         handlers: { onSubmit },
-    } = useController({ form });
+    } = useController({ form: formStore });
 
     return (
         <div className="App">
@@ -23,13 +23,15 @@ const Home = () => {
             <main className="main">
                 <img className="illustration" src={IlluImg} />
                 <section className="section-login">
-                    <LoginInput
+                    <EmailInput
+                        form={formStore.email}
                         icon={MailImg}
                         iconClassName={"mail"}
                         label={"Email address"}
                         placeholder={"jordan@gmail.com"}
                     />
-                    <LoginInput
+                    <PasswordInput
+                        form={formStore.password}
                         icon={LockImg}
                         iconClassName={"padlock"}
                         label={"Password"}

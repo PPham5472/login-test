@@ -76,6 +76,7 @@ body {
     top: 31px;
 }
 .padlock {
+    caret-color: transparent;
     left: 8px;
     position: absolute;
     top: 28px;

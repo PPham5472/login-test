@@ -1,0 +1,44 @@
+.input-container {
+    display: flex;
+    justify-content: space-between;
+
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 4px;
+    caret-color: transparent;
+    height: 32px;
+    margin-bottom: 16px;
+    padding-left: 36px;
+}
+.input-container:focus,
+.input-container:focus-visible {
+    outline: 1px solid rgb(94, 154, 209);
+}
+.input-container--focused {
+    outline: 1px solid rgb(94, 154, 209);
+}
+
+.input {
+    background-color: transparent;
+    border: none;
+    caret-color: transparent;
+    height: 32px;
+    width: 85%;
+}
+.input:focus,
+.input:focus-visible {
+    outline: none;
+}
+.input-focused {
+    caret-color: initial;
+}
+
+.show-btn {
+    background-color: transparent;
+    border: none;
+    color: rgb(0, 113, 217);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 12px;
+    width: 50px;
+}

@@ -1,3 +1,4 @@
-import LoginInput from "./LoginInput";
+import EmailInput from "./EmailInput";
+import PasswordInput from "./PasswordInput";
 
-export { LoginInput };
+export { EmailInput, PasswordInput };
