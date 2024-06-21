@@ -8,6 +8,7 @@ const users = [
 
 const api = express();
 const router = Router();
+app.use(express.json());
 api.use("/api/", router);
 
 router.post("/login", (req, res) => {

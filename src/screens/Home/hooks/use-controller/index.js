@@ -16,7 +16,7 @@ export default ({ form }) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: formValues,
+            body: JSON.stringify(formValues),
         })
             .then((res) => {
                 setIsLoading(false);
