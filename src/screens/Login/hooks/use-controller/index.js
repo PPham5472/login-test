@@ -3,7 +3,7 @@ import context from "#store";
 import mockData from "./mock-data";
 
 const { fakeFetch } = mockData();
-window.fetch = fakeFetch;
+// window.fetch = fakeFetch;
 
 export default ({ form }) => {
     const { setCurrentUser } = useContext(context);
@@ -20,7 +20,7 @@ export default ({ form }) => {
             },
             body: JSON.stringify(formValues),
         })
-            // .then((apiRes) => ({ statusCode: apiRes?.status, res: apiRes?.json() }))
+            .then((apiRes) => ({ statusCode: apiRes?.status, res: apiRes?.json() }))
             .then(({ statusCode, res }) => {
                 setIsLoading(false);
 
