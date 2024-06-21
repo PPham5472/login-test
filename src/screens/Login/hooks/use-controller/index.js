@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import context from "#store";
-import { validateForm } from "./helpers";
+import { onFormSubmit, useEffectCheckIsFormComplete, useValidate } from "./hooks";
 import mockData from "./mock-data";
 
 const { fakeFetch } = mockData();
@@ -10,41 +10,15 @@ export default ({ formStore }) => {
     const { setCurrentUser } = useContext(context);
     const [isLoading, setIsLoading] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const { validateForm } = useValidate({ formStore });
 
-    useEffect(() => {
-        const isFormComplete = formStore._values.every((item) => (item.length > 0 ? true : false));
-        if (isFormComplete) setIsButtonDisabled(false);
-        else setIsButtonDisabled(true);
-    }, [...formStore._values]);
+    useEffectCheckIsFormComplete({ formStore, setIsButtonDisabled });
 
     const onSubmit = () => {
-        setIsLoading(true);
+        const { isFormInvalid, formValidity } = validateForm(formStore);
+        if (isFormInvalid) return;
 
-        const formValues = formStore._getForm();
-        fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formValues),
-        })
-            // .then(async (apiRes) => {
-            //     const res = await apiRes.json();
-            //     return { statusCode: apiRes?.status, res };
-            // })
-            .then(({ statusCode, res }) => {
-                setIsLoading(false);
-
-                console.log(statusCode, res);
-                validateForm(formStore._getForm());
-
-                if (statusCode !== 200) {
-                    console.log("Error", res);
-                    //TODO: Trigger Error Toast
-                } else {
-                    setCurrentUser(res?.user);
-                }
-            });
+        onFormSubmit({ formStore, setCurrentUser, setIsLoading });
     };
 
     return {

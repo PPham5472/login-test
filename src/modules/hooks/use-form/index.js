@@ -1,20 +1,8 @@
-import { useState } from "react";
-
-const createState = (val = null, serialize = null) => {
-    const [value, setValue] = useState(val);
-
-    const setState = (newStateVal) => {
-        if (typeof newStateVal === "function" && serialize) {
-            setValue((prev) => serialize(newStateVal(prev)));
-        } else if (serialize) setValue(serialize(newStateVal));
-        else setValue(newStateVal);
-    };
-
-    return { value, setValue: setState };
-};
+import { createState, useValidate } from "./hooks";
+import methods from "./methods";
 
 export default (defaultValues = {}, serializers = {}) => {
-    const stateControllers = Object.keys(defaultValues).reduce(
+    const formStore = Object.keys(defaultValues).reduce(
         (prev, key) => ({
             ...prev,
             [key]: createState(defaultValues[key], serializers[key]),
@@ -22,16 +10,12 @@ export default (defaultValues = {}, serializers = {}) => {
         {}
     );
 
-    const getForm = () =>
-        Object.keys(stateControllers).reduce(
-            (prev, key) => ({
-                ...prev,
-                [key]: stateControllers[key].value,
-            }),
-            {}
-        );
+    const bindFormToMethods = Object.keys(methods).reduce(
+        (prev, key) => ({ ...prev, [`_${key}`]: () => methods[key](formStore) }),
+        {}
+    );
 
-    const values = Object.keys(stateControllers).map((key) => stateControllers[key].value);
+    const { setValidators, validate } = useValidate({ formStore });
 
-    return { ...stateControllers, _getForm: getForm, _values: values };
+    return { ...formStore, ...bindFormToMethods, _setValidators: setValidators, _validate: validate };
 };
