@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import context from "#store";
-import { onFormSubmit, useEffectCheckIsFormComplete, useValidate } from "./hooks";
+import { onFormSubmit, useEffectCheckIsFormComplete } from "./hooks";
 import mockData from "./mock-data";
 
 const { fakeFetch } = mockData();
@@ -10,13 +10,12 @@ export default ({ formStore }) => {
     const { setCurrentUser } = useContext(context);
     const [isLoading, setIsLoading] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const { validateForm } = useValidate({ formStore });
 
     useEffectCheckIsFormComplete({ formStore, setIsButtonDisabled });
 
     const onSubmit = () => {
-        const { isFormInvalid, formValidity } = validateForm(formStore);
-        if (isFormInvalid) return;
+        const { invalidCount } = formStore._validate();
+        if (invalidCount) return;
 
         onFormSubmit({ formStore, setCurrentUser, setIsLoading });
     };
@@ -26,8 +25,6 @@ export default ({ formStore }) => {
             onSubmit,
         },
         state: {
-            isLoading,
-            setIsLoading,
             isButtonDisabled,
             setIsButtonDisabled,
         },

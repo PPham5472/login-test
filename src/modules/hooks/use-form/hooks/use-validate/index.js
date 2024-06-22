@@ -1,22 +1,30 @@
 import { useState } from "react";
 
-export default ({ formStore }) => {
-    const [validators, setValidators] = useState({});
+export default ({ formStore, validators }) => {
+    Object.keys(formStore).forEach((key) => {
+        const [invalid, setInvalid] = useState(false);
+
+        formStore[key].invalid = invalid;
+        formStore[key].setInvalid = setInvalid;
+    });
 
     const validate = () => {
-        Object.keys(validators).reduce((prev, key) => {
+        const invalidCount = Object.keys(validators).reduce((prev, key) => {
             const validatorFn = validators[key];
-            const isValid = validatorFn(formStore[key].value);
+            const invalidValue = validatorFn(formStore[key].value);
 
-            return {
-                ...prev,
-                [key]: isValid,
-            };
-        }, {});
+            if (invalidValue) {
+                formStore[key].setInvalid(invalidValue);
+                return prev + 1;
+            }
+
+            return prev;
+        }, 0);
+
+        return { invalidCount };
     };
 
     return {
-        setValidators,
         validate,
     };
 };

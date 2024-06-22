@@ -7,15 +7,16 @@ import LockImg from "./assets/Lock.png";
 import LogoImg from "./assets/Logo.png";
 import MailImg from "./assets/Mail.png";
 import { EmailInput, PasswordInput } from "./components";
+import { initialValues, validators } from "./configs/form";
 import { useController } from "./hooks";
 import stylesheet from "./styles.module.css";
 
 const Login = () => {
     const { cx } = mergeStyles(stylesheet);
-    const formStore = useForm({ email: "test@applausehq.com", password: "test1234!" });
+    const formStore = useForm({ initialValues, validators });
     const {
         handlers: { onSubmit },
-        state: { isLoading, setIsLoading, isButtonDisabled, setIsButtonDisabled },
+        state: { isButtonDisabled },
     } = useController({ formStore });
 
     return (

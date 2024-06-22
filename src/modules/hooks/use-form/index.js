@@ -1,21 +1,21 @@
 import { createState, useValidate } from "./hooks";
 import methods from "./methods";
 
-export default (defaultValues = {}, serializers = {}) => {
-    const formStore = Object.keys(defaultValues).reduce(
+export default ({ initialValues = {}, serializers = {}, validators = {} }) => {
+    const formStore = Object.keys(initialValues).reduce(
         (prev, key) => ({
             ...prev,
-            [key]: createState(defaultValues[key], serializers[key]),
+            [key]: { ...createState(initialValues[key], serializers[key]) },
         }),
         {}
     );
+
+    const { validate } = useValidate({ formStore, validators });
 
     const bindFormToMethods = Object.keys(methods).reduce(
         (prev, key) => ({ ...prev, [`_${key}`]: () => methods[key](formStore) }),
         {}
     );
 
-    const { setValidators, validate } = useValidate({ formStore });
-
-    return { ...formStore, ...bindFormToMethods, _setValidators: setValidators, _validate: validate };
+    return { ...formStore, ...bindFormToMethods, _validate: validate };
 };
