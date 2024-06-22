@@ -14,12 +14,13 @@ const PasswordInput = ({ form, icon, label, placeholder }) => {
     } = useInput();
 
     return (
-        <>
+        <div className={cx("password-input")}>
             <label className={cx("input-label")}>
                 {icon && <img className={cx("padlock")} src={icon} />}
                 {label}
             </label>
-            <div className={cx(["input-container", isFocused && "input-container--focused"])}>
+            <div
+                className={cx(["input-container", isFocused && "input-container--focused", form.invalid && "invalid"])}>
                 <input
                     className={cx(["input", isFocused && "input-focused"])}
                     maxLength={255}
@@ -34,7 +35,13 @@ const PasswordInput = ({ form, icon, label, placeholder }) => {
                     {showPassword ? "Hide" : "Show"}
                 </button>
             </div>
-        </>
+            {form.invalid && (
+                <p className={cx("invalid-text")}>
+                    Password must be a minimum of 8 characters long, contain at least one uppercase letter, one
+                    lowercase letter, one number, and one special character.
+                </p>
+            )}
+        </div>
     );
 };
 

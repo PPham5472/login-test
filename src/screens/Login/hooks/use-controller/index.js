@@ -15,6 +15,7 @@ export default ({ formStore }) => {
 
     const onSubmit = () => {
         const { invalidCount } = formStore._validate();
+        console.log(invalidCount);
         if (invalidCount) return;
 
         onFormSubmit({ formStore, setCurrentUser, setIsLoading });

@@ -1,4 +1,4 @@
 export default {
     email: (email) => true,
-    password: (password) => false,
+    password: (password) => "Pasword is Invalid",
 };

@@ -1,3 +1,9 @@
+.password-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
 .input-label {
     color: rgb(35, 35, 35);
     font-size: 14px;
@@ -15,7 +21,6 @@
     border-radius: 4px;
     caret-color: transparent;
     height: 32px;
-    margin-bottom: 16px;
     padding-left: 36px;
 }
 .input-container--focused {
@@ -53,4 +58,19 @@
     font-weight: 600;
     line-height: 12px;
     width: 50px;
+}
+
+.invalid {
+    outline: 1px solid rgb(184, 32, 32);
+}
+.invalid:focus,
+.invalid:focus-visible {
+    outline: 1px solid rgb(184, 32, 32);
+}
+.invalid-text {
+    color: rgb(184, 32, 32);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    margin-top: 8px;
 }

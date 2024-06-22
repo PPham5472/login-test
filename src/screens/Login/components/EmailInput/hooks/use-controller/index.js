@@ -6,7 +6,7 @@ export default ({ form }) => {
     const inputHandler = (e) => {
         setValue(e.target.value);
         form.setValue(e.target.value);
-        // form.setInvalid(false);
+        form.setInvalid(false);
     };
 
     return {

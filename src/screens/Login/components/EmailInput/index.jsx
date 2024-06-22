@@ -3,8 +3,6 @@ import { mergeStyles } from "#modules/utils";
 import { useController } from "./hooks";
 import stylesheet from "./styles.module.css";
 
-const formInvalid = true;
-
 const EmailInput = ({ form, icon, label, placeholder }) => {
     const { cx } = mergeStyles(stylesheet);
     const {
@@ -13,19 +11,19 @@ const EmailInput = ({ form, icon, label, placeholder }) => {
     } = useController({ form });
 
     return (
-        <div className={cx("input-container")}>
+        <div className={cx("email-input")}>
             <label className={cx("input-label")}>
                 {icon && <img className={cx("mail")} src={icon} />}
                 {label}
             </label>
             <input
-                className={cx(["input", formInvalid && "invalid"])}
+                className={cx(["input", form.invalid && "invalid"])}
                 maxLength={255}
                 onChange={inputHandler}
                 placeholder={placeholder}
                 value={value}
             />
-            {formInvalid && <p className={cx("invalid-text")}>Use a valid email format of name@example.com</p>}
+            {form.invalid && <p className={cx("invalid-text")}>Use a valid email format of name@example.com</p>}
         </div>
     );
 };
