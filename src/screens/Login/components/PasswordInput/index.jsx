@@ -23,7 +23,7 @@ const PasswordInput = ({ form, icon, label, placeholder }) => {
                 className={cx(["input-container", isFocused && "input-container--focused", form.invalid && "invalid"])}>
                 <input
                     className={cx(["input", isFocused && "input-focused"])}
-                    maxLength={255}
+                    // maxLength={255}
                     onBlur={() => setIsFocused(false)}
                     onChange={inputHandler}
                     onFocus={() => setIsFocused(true)}

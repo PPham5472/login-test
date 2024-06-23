@@ -1,1 +1,1 @@
-export default { email: "test@applausehq.com", password: "test1234!" };
+export default { email: "test@applausehq.com", password: "Test1234!" };

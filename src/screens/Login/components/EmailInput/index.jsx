@@ -17,7 +17,7 @@ const EmailInput = ({ form, icon, label, placeholder }) => {
                 {label}
             </label>
             <input
-                className={cx(["input", form.invalid && "invalid"])}
+                className={cx(["input", form.invalid && "---invalid---"])}
                 maxLength={255}
                 onChange={inputHandler}
                 placeholder={placeholder}
