@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import context from "#store";
 import { onFormSubmit, useEffectCheckIsFormComplete } from "./hooks";
-import mockData from "./mock-data";
 
+//Local Testing (Fake BE endpoint)
+import mockData from "./mock-data";
 const { fakeFetch } = mockData();
-window.fetch = fakeFetch;
+// window.fetch = fakeFetch;
 
 export default ({ formStore }) => {
     const { setCurrentUser } = useContext(context);

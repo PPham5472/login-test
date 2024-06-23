@@ -31,7 +31,7 @@ const PasswordInput = ({ form, icon, label, placeholder }) => {
                     type={showPassword ? "text" : "password"}
                     value={value}
                 />
-                <button className={cx("show-btn")} onClick={() => setShowPassword((prev) => !prev)}>
+                <button className={cx("show-btn")} onClick={() => setShowPassword(true)}>
                     {showPassword ? "Hide" : "Show"}
                 </button>
             </div>

@@ -18,11 +18,16 @@ router.post("/login", (req, res) => {
 
     //Input Validation
     if (password.length > 255)
-        return res.status(400).json({ status: "failed", error: "Email must be less than 255 characters long." });
+        return res
+            .status(400)
+            .json({ status: "failed", error: "Password must be less than 255 characters long.", errorCode: "E1" });
 
     //Credentials Validation
     const currentUser = users.filter((user) => user.email === body.email)[0];
-    if (!currentUser) return res.status(400).json({ status: "failed", error: "Email not found." });
+    if (!currentUser)
+        return res
+            .status(400)
+            .json({ statusCode: 400, res: { status: "failed", error: "Email not found.", errorCode: "E2" } });
 
     if (currentUser?.password === body.password) {
         return res
@@ -30,7 +35,9 @@ router.post("/login", (req, res) => {
             .json({ status: "success", user: { email: currentUser?.email, name: currentUser?.name } });
     }
 
-    return res.status(400).json({ status: "failed", error: "Invalid Login 2" });
+    return res
+        .status(400)
+        .json({ statusCode: 400, res: { status: "failed", error: "Invalid Login", errorCode: "E3" } });
 });
 
 export const handler = serverless(api);

@@ -8,10 +8,10 @@ export default ({ formStore, setCurrentUser, setIsLoading, setDisplayToast }) =>
         },
         body: JSON.stringify(formStore._getForm()),
     })
-        // .then(async (apiRes) => {
-        //     const res = await apiRes.json();
-        //     return { statusCode: apiRes?.status, res };
-        // })
+        .then(async (apiRes) => {
+            const res = await apiRes.json();
+            return { statusCode: apiRes?.status, res };
+        })
         .then(({ statusCode, res }) => {
             setIsLoading(false);
 

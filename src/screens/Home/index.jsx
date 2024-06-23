@@ -17,7 +17,6 @@ const Home = () => {
 
     const clickHander = () => {
         setCurrentUser(null);
-        navigate("/");
     };
 
     return (

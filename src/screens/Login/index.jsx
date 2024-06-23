@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Toast } from "#library/components";
 import { useForm } from "#modules/hooks";
 import { mergeStyles } from "#modules/utils";
@@ -18,6 +18,12 @@ const Login = () => {
         handlers: { onSubmit },
         state: { isButtonDisabled, displayToast, setDisplayToast },
     } = useController({ formStore });
+
+    //Intentional Bug
+    const [disableButton, setDisableButton] = useState(true);
+    useEffect(() => {
+        if (!isButtonDisabled) setDisableButton(false);
+    }, [isButtonDisabled]);
 
     return (
         <div className={cx("App")}>
@@ -42,9 +48,9 @@ const Login = () => {
                         type="password"
                     />
                     <Button
-                        className={cx(isButtonDisabled ? "button-disabled" : "")}
+                        className={cx(disableButton ? "button-disabled" : "")}
                         ctr={{ onSubmit }}
-                        disabled={isButtonDisabled}>
+                        disabled={disableButton}>
                         Login
                     </Button>
                 </section>
