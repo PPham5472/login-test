@@ -17,10 +17,10 @@ router.post("/login", (req, res) => {
     } = req;
 
     //Input Validation
-    if (email.length < 1) {
-        const x = 1;
-        x = 2;
-    }
+    // if (email.length < 1) {
+    //     const x = 1;
+    //     x = 2;
+    // }
     if (password.length > 255)
         return res
             .status(400)
