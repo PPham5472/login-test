@@ -13,7 +13,7 @@ export const ContextProvider = (props) => {
         if (currentUser) {
             navigate("/home");
         } else {
-            navigate("/login");
+            navigate("/");
         }
     }, [currentUser]);
 

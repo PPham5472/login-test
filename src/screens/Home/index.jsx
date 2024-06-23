@@ -12,7 +12,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!currentUser) navigate("/login");
+        if (!currentUser) navigate("/");
     }, []);
 
     const clickHander = () => {
