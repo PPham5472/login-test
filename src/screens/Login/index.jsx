@@ -19,11 +19,12 @@ const Login = () => {
         state: { isButtonDisabled, displayToast, setDisplayToast },
     } = useController({ formStore });
 
-    //Intentional Bug
+    //Intentional Bugs
     const [disableButton, setDisableButton] = useState(true);
     useEffect(() => {
         if (!isButtonDisabled) setDisableButton(false);
     }, [isButtonDisabled]);
+    const isChrome = !!window.chrome;
 
     return (
         <div className={cx("App")}>
@@ -32,7 +33,7 @@ const Login = () => {
                 <img src={LogoImg} />
             </header>
             <main className={cx("main")}>
-                <img className={cx("illustration")} src={IlluImg} />
+                {isChrome && <img className={cx("illustration")} src={IlluImg} />}
                 <section className={cx("section-login")}>
                     <EmailInput
                         form={formStore.email}
