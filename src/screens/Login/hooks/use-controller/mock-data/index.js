@@ -1,6 +1,6 @@
 const users = [
     { email: "test@applausehq.com", password: "Test1234!", name: "Test User" },
-    { email: "peter@applausehq.com", password: "Cookies123!", name: "Peter Pham" },
+    { email: "peter@applausehq.com", password: "Applause123!", name: "Peter Pham" },
 ];
 
 export default () => {

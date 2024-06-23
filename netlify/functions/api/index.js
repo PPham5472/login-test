@@ -18,7 +18,7 @@ router.post("/login", (req, res) => {
 
     //Input Validation
     if (email.length < 1) {
-        throw new Error("Invalid email");
+        throw new Error("Email cannot be empty.");
     }
     if (password.length > 255)
         return res
