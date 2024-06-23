@@ -3,7 +3,7 @@ import serverless from "serverless-http";
 
 const users = [
     { email: "test@applausehq.com", password: "Test1234!", name: "Test User" },
-    { email: "peter@applausehq.com", password: "Cookies123!", name: "Peter Pham" },
+    { email: "peter@applausehq.com", password: "Applause123!", name: "Peter Pham" },
 ];
 
 const api = express();
@@ -18,7 +18,7 @@ router.post("/login", (req, res) => {
 
     //Input Validation
     if (email.length < 1) {
-        throw new Error("Email cannot be empty.");
+        throw new Error("Invalid email");
     }
     if (password.length > 255)
         return res
