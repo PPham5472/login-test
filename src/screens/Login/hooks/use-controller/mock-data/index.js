@@ -12,13 +12,14 @@ export default () => {
         //Input Validation
         if (password.length > 255)
             return {
-                statusCode: 200,
-                res: { status: "failed", error: "Email must be less than 255 characters long." },
+                statusCode: 400,
+                res: { status: "failed", error: "Password must be less than 255 characters long.", errorCode: "E1" },
             };
 
         //Credentials Validation
         const currentUser = users.filter((user) => user.email === body.email)[0];
-        if (!currentUser) return { statusCode: 400, res: { status: "failed", error: "Email not found." } };
+        if (!currentUser)
+            return { statusCode: 400, res: { status: "failed", error: "Email not found.", errorCode: "E2" } };
 
         if (currentUser?.password === body.password) {
             return {
@@ -27,7 +28,7 @@ export default () => {
             };
         }
 
-        return { statusCode: 400, res: { status: "failed", error: "Invalid Login" } };
+        return { statusCode: 400, res: { status: "failed", error: "Invalid Login", errorCode: "E3" } };
     };
 
     return {

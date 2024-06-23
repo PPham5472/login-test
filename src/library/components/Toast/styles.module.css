@@ -13,10 +13,10 @@
     left: 16px;
     z-index: 1000;
 
-    transform: translateX(0px);
+    /* transform: translateX(0px);
     transition-duration: 250ms, 250ms, 250ms;
     transition-timing-function: cubic-bezier(0.51, 0.3, 0, 1.21), cubic-bezier(0.51, 0.3, 0, 1.21), linear;
-    transition-property: opacity, transform, max-height;
+    transition-property: opacity, transform, max-height; */
 }
 .toast-banner {
     background-color: rgb(184, 32, 32);
@@ -27,7 +27,7 @@
 .toast-content {
     padding: 16px;
 }
-.toast-header {
+.toast-title {
     color: rgb(115, 24, 20);
     text-overflow: ellipsis;
     font-size: 16px;
@@ -43,9 +43,6 @@
     text-overflow: ellipsis;
 }
 .toast-close-button {
-    color: rgb(102, 102, 102);
-    font-size: 14px;
-    line-height: 1.4;
     height: 16px;
     width: 16px;
 }

@@ -21,7 +21,7 @@ const Login = () => {
 
     return (
         <div className={cx("App")}>
-            {displayToast && <Toast setDisplayToast={setDisplayToast} />}
+            {displayToast && <Toast displayToast={displayToast} setDisplayToast={setDisplayToast} />}
             <header className={cx("header")}>
                 <img src={LogoImg} />
             </header>
