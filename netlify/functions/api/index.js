@@ -24,10 +24,7 @@ router.post("/login", (req, res) => {
 
     //Credentials Validation
     const currentUser = users.filter((user) => user.email === email)[0];
-    if (!currentUser)
-        return res
-            .status(400)
-            .json({ statusCode: 400, res: { status: "failed", error: "Email not found.", errorCode: "E2" } });
+    if (!currentUser) return res.status(400).json({ status: "failed", error: "Email not found.", errorCode: "E2" });
 
     if (currentUser?.password === password) {
         return res
@@ -35,9 +32,7 @@ router.post("/login", (req, res) => {
             .json({ status: "success", user: { email: currentUser?.email, name: currentUser?.name } });
     }
 
-    return res
-        .status(400)
-        .json({ statusCode: 400, res: { status: "failed", error: "Invalid Login", errorCode: "E3" } });
+    return res.status(400).json({ status: "failed", error: "Invalid Login", errorCode: "E3" });
 });
 
 export const handler = serverless(api);
