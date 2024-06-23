@@ -17,11 +17,11 @@ export default () => {
             };
 
         //Credentials Validation
-        const currentUser = users.filter((user) => user.email === body.email)[0];
+        const currentUser = users.filter((user) => user.email === email)[0];
         if (!currentUser)
             return { statusCode: 400, res: { status: "failed", error: "Email not found.", errorCode: "E2" } };
 
-        if (currentUser?.password === body.password) {
+        if (currentUser?.password === password) {
             return {
                 statusCode: 200,
                 res: { status: "success", user: { email: currentUser?.email, name: currentUser?.name } },

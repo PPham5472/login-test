@@ -1,3 +1,4 @@
+import e from "express";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +13,8 @@ export const ContextProvider = (props) => {
     useEffect(() => {
         if (currentUser) {
             navigate("/home");
+        } else {
+            navigate("/login");
         }
     }, [currentUser]);
 

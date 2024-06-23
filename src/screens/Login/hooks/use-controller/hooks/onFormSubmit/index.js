@@ -15,10 +15,7 @@ export default ({ formStore, setCurrentUser, setIsLoading, setDisplayToast }) =>
         .then(({ statusCode, res }) => {
             setIsLoading(false);
 
-            console.log(statusCode, res);
-
             if (statusCode !== 200) {
-                console.log("Error", res);
                 const { errorCode } = res;
 
                 switch (errorCode) {
