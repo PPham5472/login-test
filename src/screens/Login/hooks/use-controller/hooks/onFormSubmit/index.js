@@ -1,4 +1,4 @@
-export default ({ formStore, setCurrentUser, setIsLoading }) => {
+export default ({ formStore, setCurrentUser, setIsLoading, setDisplayToast }) => {
     setIsLoading(true);
 
     fetch("/api/login", {
@@ -19,7 +19,7 @@ export default ({ formStore, setCurrentUser, setIsLoading }) => {
 
             if (statusCode !== 200) {
                 console.log("Error", res);
-                //TODO: Trigger Error Toast
+                setDisplayToast(true);
             } else {
                 setCurrentUser(res?.user);
             }

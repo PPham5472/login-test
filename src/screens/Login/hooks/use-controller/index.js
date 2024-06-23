@@ -10,6 +10,7 @@ export default ({ formStore }) => {
     const { setCurrentUser } = useContext(context);
     const [isLoading, setIsLoading] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [displayToast, setDisplayToast] = useState(false);
 
     useEffectCheckIsFormComplete({ formStore, setIsButtonDisabled });
 
@@ -18,7 +19,7 @@ export default ({ formStore }) => {
         console.log(invalidCount);
         if (invalidCount) return;
 
-        onFormSubmit({ formStore, setCurrentUser, setIsLoading });
+        onFormSubmit({ formStore, setCurrentUser, setIsLoading, setDisplayToast });
     };
 
     return {
@@ -28,6 +29,8 @@ export default ({ formStore }) => {
         state: {
             isButtonDisabled,
             setIsButtonDisabled,
+            displayToast,
+            setDisplayToast,
         },
     };
 };

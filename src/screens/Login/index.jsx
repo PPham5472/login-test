@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "#library/components";
+import { Button, Toast } from "#library/components";
 import { useForm } from "#modules/hooks";
 import { mergeStyles } from "#modules/utils";
 import IlluImg from "./assets/Illu.png";
@@ -16,11 +16,12 @@ const Login = () => {
     const formStore = useForm({ initialValues, validators });
     const {
         handlers: { onSubmit },
-        state: { isButtonDisabled },
+        state: { isButtonDisabled, displayToast, setDisplayToast },
     } = useController({ formStore });
 
     return (
         <div className={cx("App")}>
+            {displayToast && <Toast setDisplayToast={setDisplayToast} />}
             <header className={cx("header")}>
                 <img src={LogoImg} />
             </header>
