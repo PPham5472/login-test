@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import context from "#store";
-import { onFormSubmit, useEffectCheckIsFormComplete } from "./hooks";
+import { localOnFormSubmit, onFormSubmit, useEffectCheckIsFormComplete } from "./hooks";
 
 //Local Testing (Fake BE endpoint)
 import mockData from "./mock-data";
 const { fakeFetch } = mockData();
-// window.fetch = fakeFetch;
+if (import.meta.env.VITE_APP_ENVIRONMENT !== "PROD") window.fetch = fakeFetch;
 
 export default ({ formStore }) => {
     const { setCurrentUser } = useContext(context);
@@ -19,7 +19,11 @@ export default ({ formStore }) => {
         const { invalidCount } = formStore._validate();
         if (invalidCount) return;
 
-        onFormSubmit({ formStore, setCurrentUser, setIsLoading, setDisplayToast });
+        if (import.meta.env.VITE_APP_ENVIRONMENT === "PROD") {
+            onFormSubmit({ formStore, setCurrentUser, setIsLoading, setDisplayToast });
+        } else {
+            localOnFormSubmit({ formStore, setCurrentUser, setIsLoading, setDisplayToast });
+        }
     };
 
     return {
