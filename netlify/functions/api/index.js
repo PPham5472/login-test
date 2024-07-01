@@ -23,7 +23,7 @@ router.post("/login", (req, res) => {
     if (password.length > 255)
         return res
             .status(400)
-            .json({ status: "failed", error: "Password must be less than 255 characters long.", errorCode: "E1" });
+            .json({ status: "failed", error: "Email must be less than 255 characters long.", errorCode: "E1" });
 
     //Credentials Validation
     const currentUser = users.filter((user) => user.email === email)[0];
