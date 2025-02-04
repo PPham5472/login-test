@@ -20,16 +20,26 @@ router.post("/login", (req, res) => {
     if (email.length < 1) {
         throw new Error("Invalid email");
     }
+    if (email.length > 255)
+        return res.status(400).json({
+            status: "failed",
+            error: "Email must be less than 255 characters long",
+            errorCode: "E0",
+        });
     if (password.length > 255)
-        return res
-            .status(400)
-            .json({ status: "failed", error: "Email must be less than 255 characters long.", errorCode: "E1" });
+        return res.status(400).json({
+            status: "failed",
+            error: "Password must be less than 255 characters long.",
+            errorCode: "E1",
+        });
 
     //Credentials Validation
-    const currentUser = users.filter((user) => user.email === email)[0];
-    if (!currentUser) return res.status(400).json({ status: "failed", error: "Email not found.", errorCode: "E2" });
+    const currentUser = users.find((user) => user.email === email);
+    if (!currentUser)
+        return res.status(400).json({ status: "failed", error: "Email not found.", errorCode: "E2" });
 
-    if (currentUser?.password === password) {
+    //Intentional Bug
+    if (currentUser.password.toLowerCase() === password.toLowerCase()) {
         return res
             .status(200)
             .json({ status: "success", user: { email: currentUser?.email, name: currentUser?.name } });

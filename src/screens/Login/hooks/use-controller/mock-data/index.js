@@ -10,18 +10,35 @@ export default () => {
         const { email, password } = body;
 
         //Input Validation
+        if (email.length > 255)
+            return {
+                statusCode: 400,
+                res: {
+                    status: "failed",
+                    error: "Email must be less than 255 characters long",
+                    errorCode: "E0",
+                },
+            };
         if (password.length > 255)
             return {
                 statusCode: 400,
-                res: { status: "failed", error: "Password must be less than 255 characters long.", errorCode: "E1" },
+                res: {
+                    status: "failed",
+                    error: "Password must be less than 255 characters long.",
+                    errorCode: "E1",
+                },
             };
 
         //Credentials Validation
-        const currentUser = users.filter((user) => user.email === email)[0];
+        const currentUser = users.find((user) => user.email === email);
         if (!currentUser)
-            return { statusCode: 400, res: { status: "failed", error: "Email not found.", errorCode: "E2" } };
+            return {
+                statusCode: 400,
+                res: { status: "failed", error: "Email not found.", errorCode: "E2" },
+            };
 
-        if (currentUser?.password === password) {
+        //Intentional Bug
+        if (currentUser.password.toLowerCase() === password.toLowerCase()) {
             return {
                 statusCode: 200,
                 res: { status: "success", user: { email: currentUser?.email, name: currentUser?.name } },

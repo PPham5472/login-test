@@ -18,12 +18,13 @@ const EmailInput = ({ form, icon, label, placeholder }) => {
             </label>
             <input
                 className={cx(["input", form.invalid && "---invalid---"])}
-                maxLength={255}
                 onChange={inputHandler}
                 placeholder={placeholder}
                 value={value}
             />
-            {form.invalid && <p className={cx("invalid-text")}>Use a valid email format of name@example.com</p>}
+            {form.invalid && (
+                <p className={cx("invalid-text")}>Use a valid email format of name@example.com</p>
+            )}
         </div>
     );
 };

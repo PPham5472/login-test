@@ -10,7 +10,10 @@ export default {
             );
     },
     password: (password) => {
-        const expression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#$%^&*()\-_+=[\]{}|;:'",<>./?` ]).{8,}$/;
+        //Intentional Bug - changed to not allow 2 or more symbols
+        // const expression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#$%^&*()\-_+=[\]{}|;:'",<>./?` ]).{8,}$/;
+        const expression =
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#$%^&*()\-_+=[\]{}|;:'",<>./?` ])(?!.*[~!@#$%^&*()\-_+=[\]{}|;:'",<>./?` ].*[~!@#$%^&*()\-_+=[\]{}|;:'",<>./?` ]).{8,}$/;
 
         return !expression.test(password);
     },

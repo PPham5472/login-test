@@ -14,6 +14,10 @@ export default ({ formStore, setCurrentUser, setIsLoading, setDisplayToast }) =>
             const { errorCode } = res;
 
             switch (errorCode) {
+                case "E0":
+                    //Intentional Bug - Does not display Toast
+                    setDisplayToast(null);
+                    break;
                 case "E1":
                     setDisplayToast("Email must be less than 255 characters long.");
                     break;
